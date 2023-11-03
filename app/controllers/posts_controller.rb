@@ -67,7 +67,7 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       post = Post.find(params[:id])
-      if current_user.subscription_status == "incomplete" && post.premium == false
+      if current_user.subscription_status != "incomplete" && post.premium == false
         @post = post
       else
         flash[:danger] = "This post is only for active subscribers!" 
