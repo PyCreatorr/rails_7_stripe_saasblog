@@ -3,11 +3,17 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    if current_user.subscription_status == "active"
+      @posts = Post.all    
+    else 
+      @posts = Post.free
+    end    
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+  
+
   end
 
   # GET /posts/new
@@ -60,7 +66,15 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      post = Post.find(params[:id])
+      if current_user.subscription_status == "incomplete" && post.premium == false
+        @post = post
+      else
+        flash[:danger] = "This post is only for active subscribers!" 
+        redirect_to posts_path
+             
+      end     
+
     end
 
     # Only allow a list of trusted parameters through.

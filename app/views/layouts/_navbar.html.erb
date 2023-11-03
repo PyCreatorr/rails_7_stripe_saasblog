@@ -24,7 +24,8 @@
       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
         <div class="flex flex-shrink-0 items-center">        
           <%= link_to root_path, class: "btn btn-primary" do %>
-            <i class="fa-solid fa-sd-card fa-xl" style="color: #62d092;"></i>            
+            <i class="fa-brands fa-stripe-s fa-xl" style="color: #62d092;"></i> 
+       
           <% end %>
         </div>
         <%# if user_signed_in? %>
@@ -84,6 +85,16 @@
               <ul class="space-y-4 text-left text-gray-300 dark:text-gray-400 hidden md:block" style="color: #a66cfe">
                 <li class="flex items-center space-x-3 text-sm font-medium">
                   <%#= current_user.stripe_customer_id %>
+                </li>
+              </ul>              
+            </div>
+          <%# end %>
+        <%# if current_user.plan.present? %>
+            <div class="flex flex-shrink-0 items-center px-3 py-2">
+              <ul class="space-y-4 text-left text-gray-300 dark:text-gray-400 hidden md:block" style="color: #a66cfe">
+                <li class="flex items-center space-x-3 text-sm font-medium">
+                  <%= current_user.plan %>
+                  <%= current_user.subscription_status %>
                 </li>
               </ul>              
             </div>
