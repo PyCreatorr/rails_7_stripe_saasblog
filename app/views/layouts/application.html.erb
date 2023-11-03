@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <script src="https://js.stripe.com/v3/"></script>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -12,8 +13,17 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <div id="reload"></div> <!-- id=reload - is for the turbo button to reload the page with the stripe -->
+    <div class="min-h-full">
+      <%#= render 'layouts/navbar' %>
+      <%#= render 'layouts/header', header: request.path == '/users/edit' ? 'Profile' : "Dashboard"  %>
+      <main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <%= render "layouts/flash"%>      
+        <%= yield %>
+      </main>
+      <%= render partial: "layouts/footer" %>
+    </div>
   </body>
+
 </html>
+
