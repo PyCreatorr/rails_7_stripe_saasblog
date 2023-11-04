@@ -80,15 +80,15 @@
           </li>
         </ul>
 
-        <%# if current_user.stripe_customer_id.present? %>
+        <% if current_user.stripe_customer_id.present? %>
             <div class="flex flex-shrink-0 items-center px-3 py-2">
               <ul class="space-y-4 text-left text-gray-300 dark:text-gray-400 hidden md:block" style="color: #a66cfe">
                 <li class="flex items-center space-x-3 text-sm font-medium">
-                  <%#= current_user.stripe_customer_id %>
+                  <%= current_user.stripe_customer_id %>
                 </li>
               </ul>              
             </div>
-          <%# end %>
+          <% end %>
         <%# if current_user.plan.present? %>
             <div class="flex flex-shrink-0 items-center px-3 py-2">
               <ul class="space-y-4 text-left text-gray-300 dark:text-gray-400 hidden md:block" style="color: #a66cfe">
