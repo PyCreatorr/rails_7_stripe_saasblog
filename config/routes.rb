@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   post "checkout/create", to: "checkout#create", as: "checkout_create"
 
+  post "billing_portal/create", to: "billing_portal#create", as: "billing_portal_create"
+
+  resources :webhooks, only: [:create]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
