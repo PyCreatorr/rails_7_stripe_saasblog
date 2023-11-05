@@ -25,20 +25,27 @@ class WebhooksController < ApplicationController
         end
   
       # Handle the event
-      case event.type
       when 'checkout.session.completed'
-            session = event.data.object 
-            session_with_expand = Stripe::Checkout::Session.retrieve({ id: session.id, expand: ["line_items"]})
-            session_with_expand.line_items.data.each do |line_item| 
-              product = Product.find_by("stripe_product_id": line_item.price.product)
-              product.increment!(:sales_count) if product.present? # increment saves the product in db also               
-            end
+        session = event.data.object 
+        @user = User.find_by(stripe_customer_id: session.customer)
+        @user.update(subscription_status: 'active')
+
+      when 'checkout.subscription.updated', 'customer.subscription.deleted'
+        subscription = event.data.object
+        @user = User.find_by(stripe_customer_id: subscription.customer)
+
+        @user.update(
+              subscription_status: subscription_status,
+              plan: subscription.itemsdata[0].price.lookup_key
+              )             
       else 
         puts "Unhandled event type: #{event.type}"
       end        
-          
-      puts 'PaymentIntent was successful!'
-      render status: 200, json: { message: 'success' }
+            
+        puts 'PaymentIntent was successful!'
+        render status: 200, json: { message: 'success' }
     end
-end
+  end
+
+
 
