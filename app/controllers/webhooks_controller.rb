@@ -36,8 +36,8 @@ class WebhooksController < ApplicationController
         @user = User.find_by(stripe_customer_id: subscription.customer)
 
         @user.update(
-              subscription_status: subscription_status,
-              plan: subscription.itemsdata[0].price.lookup_key
+              subscription_status: subscription.status,
+              plan: subscription.items.data[0].price.lookup_key
               )             
       else 
         puts "Unhandled event type: #{event.type}"
