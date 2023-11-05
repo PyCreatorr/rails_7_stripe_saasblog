@@ -38,6 +38,9 @@
               <div class ="<%= 'rounded-md bg-gray-900' if request.path == "/posts" %>">
                 <%= link_to 'Posts', posts_path, class: 'inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium' %>
               </div>
+              <div class ="<%= 'rounded-md bg-gray-900' if request.path == "/pricing" %>">
+                <%= link_to 'Pricing', pricing_path, class: 'inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium' %>
+              </div>
               <%# Dropdown menu%>
               <div data-action="menu#toggle" class="relative inline-block text-left <%= 'rounded-md bg-gray-900' if request.path == edit_user_registration_path %>">
                   <%= content_tag(:button, data: {action: "click->menu#toggle"}, class: "inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium") do%>
