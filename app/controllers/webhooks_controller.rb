@@ -25,6 +25,7 @@ class WebhooksController < ApplicationController
         end
   
       # Handle the event
+      case event.type
       when 'checkout.session.completed'
         session = event.data.object 
         @user = User.find_by(stripe_customer_id: session.customer)
@@ -45,7 +46,7 @@ class WebhooksController < ApplicationController
         puts 'PaymentIntent was successful!'
         render status: 200, json: { message: 'success' }
     end
-  end
+end
 
 
 
