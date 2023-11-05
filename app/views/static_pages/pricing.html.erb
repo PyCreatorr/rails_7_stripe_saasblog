@@ -10,8 +10,9 @@
     <%= price.currency%>
     <%= price.recurring.interval%>
     <br>
+    <br>
+    <%= button_to "Payment", checkout_create_path(price_id: price.id), data: { disable_with: "validating .."}, data: { controller: "payment-button", action: "click->payment-button#handleClick"},
+        class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %> 
+
 <%end%>
 
-<br>
-<%= button_to "Payment", checkout_create_path, data: { disable_with: "validating .."}, data: { controller: "payment-button", action: "click->payment-button#handleClick"},
-        class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>

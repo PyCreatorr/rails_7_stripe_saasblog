@@ -15,7 +15,8 @@ class CheckoutController < ApplicationController
             #line_items:
             
             line_items: [
-                {price: 'price_1O8poAFB6XWBwuphradYNRW5', quantity: 1},
+                #{price: 'price_1O8poAFB6XWBwuphradYNRW5', quantity: 1},
+                {price: params[:price_id], quantity: 1},
             ],
             mode: 'subscription',
 
