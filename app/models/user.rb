@@ -8,9 +8,10 @@ class User < ApplicationRecord
     email
   end
 
-  # WE MOVE THIS LOGIC IN TO WEBHOOK
-  # after_create do
-  #   stripe_customer = Stripe::Customer.create( email: self.email )
+  after_create do
+    # send this request to the stripe!!!!
+    stripe_customer = Stripe::Customer.create( email: self.email )
+    # WE MOVED THIS LOGIC IN TO WEBHOOK
   #   update(stripe_customer_id: stripe_customer.id)
-  # end
+ end
 end
