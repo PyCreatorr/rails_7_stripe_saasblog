@@ -26,6 +26,11 @@ class WebhooksController < ApplicationController
   
       # Handle the event
       case event.type
+      when 'customer.created'
+        stripe_customer = event.data.object
+        user = User.find_by(email: stripe_customer.email)
+        user.update(stripe_customer_id: stripe_customer.id)
+
       when 'checkout.session.completed'
         session = event.data.object 
         @user = User.find_by(stripe_customer_id: session.customer)
@@ -38,7 +43,7 @@ class WebhooksController < ApplicationController
         @user.update(
               subscription_status: subscription.status,
               plan: subscription.items.data[0].price.lookup_key
-              )             
+              )
       else 
         puts "Unhandled event type: #{event.type}"
       end        
